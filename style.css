@@ -1,0 +1,233 @@
+/*comment*/
+:root {
+    --color-background:rgb(18, 28, 51);
+    --color-dark:#333;
+    --color-light:#f6f5f4;
+    --color-warning: rbg(95, 35, 35,);
+}
+
+body {
+    margin: 0;
+    background-color: var(--color-background);
+    color: var(--color-light);
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    grid-template-rows: 0.5fr 1fr 3fr;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.title {
+    text-align: center;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    letter-spacing: 1px;
+    font-size: 1.75rem;
+}
+
+.proj-side {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 4;
+}
+
+.proj-list {
+    font-size: 1.5rem;
+    line-height: 2;
+    list-style: circle;
+}
+
+.proj-name {
+    cursor: pointer;
+}
+
+.proj-name:hover {
+    opacity: 0.75;
+}
+
+form {
+    display: flex;
+    font-size: inherit;
+}
+
+.btn-proj,
+.btn-create {
+    cursor: pointer;
+    background: 0;
+    border: 0;
+    padding: 3px;
+    color: inherit;
+    font-size: 2rem;
+    font-weight: 900;
+    /*margin-right: We'll need to adjust this later*/
+    transition: opacity 250ms ease-in;
+}
+
+.btn-proj:hover,
+.btn-create:hover {
+    opacity: 0.75;
+}
+
+.btn-delete {
+    opacity: 0.75;
+    font-size: 1rem;
+    transition: color 200ms;
+}
+
+.btn-delete:hover {
+    color: var(--color-warning);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.new {
+    background: transparent;
+    border: 0;
+    color: inherit;
+    font-size: inherit;
+    outline: none;
+    transition: border-bottom 250ms ease-in;
+    order: 2;
+    border-color: black;
+}
+
+.new::placeholder {
+    opacity: 0.75;
+    color: inherit;
+}
+
+.new:focus {
+    border-bottom-width: 3px;
+}
+
+.new:focus::placeholder {
+    opacity: 0.25;
+}
+
+.new.proj {
+    font-size: 1.2rem;
+    border-bottom: 1px solid currentColor;
+}
+
+.new.task {
+    margin-bottom: 0;
+}
+
+.active-proj {
+    font-weight: 900;
+}
+
+.todo-list {
+    background: var(--color-light);
+    color: var(--color-dark);
+}
+
+.todo-header {
+    background: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.75rem;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
+.task-count {
+    margin: 0;
+    font-size: 1rem;
+
+}
+
+.todo-body {
+    padding: 1.75rem;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 4;
+}
+
+.new-task-creator,
+.create {
+    color: var(--color-background);
+}
+
+[type="checkbox"] {
+    opacity: 0;
+    position: absolute;
+}
+
+.task label {
+    position: relative;
+    margin-bottom: 1.25em;
+}
+
+.task::after { 
+    content: "";
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.1;
+}
+
+.custom-checkbox {
+    display: inline-block;
+    cursor: pointer;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    transform: scale(1);
+    transition: transform 200ms ease-in-out;
+    width: 0.75em;
+    height: 0.75em;
+    margin-right: 0.75em;
+}
+
+.task:hover .custom-checkbox,
+[type="checkbox"]:focus + label .custom-checkbox {
+    transform: scale(1.2);
+    color: var(--color-background);
+}
+
+[type="checkbox"]:checked + label .custom-checkbox {
+    background: var(--color-background);
+    border-color: var(--color-light);
+    box-shadow: inset 0 0 0px 2px white;
+}
+
+[type="checkbox"]:checked + label {
+    opacity: 0.5;
+}
+
+.task label::after {
+    content: "";
+    position: absolute;
+    left: 1.5em;
+    right: 0;
+    top: 50%;
+    height: 3px;
+    background: currentColor;
+    transform: scale(0);
+    transform-origin: right;
+    transition: transform 150ms ease-in-out;
+
+}
+
+[type="checkbox"]:checked + label::after {
+    transform: scale(1);
+    transform-origin: left;
+}
+
+.delete-btns {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    color: var(--clr-light);
+    
+}
