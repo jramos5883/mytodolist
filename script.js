@@ -25,8 +25,9 @@ const taskDisplayContainer = document.querySelector('[data-task-display-containe
 const projTitle = document.querySelector('[data-proj-title]');
 const taskCount = document.querySelector('[data-task-count]');
 const taskContainer = document.querySelector('[data-tasks]');
-const newTaskForm = document.querySelector('[data-new-task-form]')
-const newTaskInput = document.querySelector('[data-new-task-input]')
+const newTaskForm = document.querySelector('[data-new-task-form]');
+const newTaskInput = document.querySelector('[data-new-task-input]');
+const clearCompleteTasksBtn = document.querySelector('[data-clear-tasks]');
 
 //Need event listener to interact with DOM created elements, used to target selected list
 //if element ('li') is clicked, it is selected
@@ -34,6 +35,17 @@ listsContainer.addEventListener('click', e => {
     if (e.target.tagName.toLowerCase() === 'li') {
         selectedListId = e.target.dataset.listId;
         saveAndRender();
+    }
+})
+
+//used to target checkbox and refresh task counter
+taskContainer.addEventListener('click', e => {
+    if (e.target.tagName.toLowerCase() === 'input') {
+        const selectedProj = myProjects.find(list => list.id === selectedListId);
+        const selectedTask = selectedProj.tasks.find(task => task.id === e.target.id);
+        selectedTask.complete = e.target.checked;
+        save();
+        renderTaskCount(selectedProj);
     }
 })
 
@@ -49,6 +61,7 @@ newProjForm.addEventListener('submit', e => {
     saveAndRender();
 })
 
+//adds task to task list and refreshes page
 newTaskForm.addEventListener('submit', e => {
     //prevents the page from refreshing, negates default browser settings
     e.preventDefault();
@@ -56,8 +69,15 @@ newTaskForm.addEventListener('submit', e => {
     if (taskName == null || taskName === '') return;
     const task = createTask(taskName);
     newTaskInput.value = null;
-    const selectedProj = myProjects.find(proj => proj.id === selectedListId);
+    const selectedProj = myProjects.find(list => list.id === selectedListId);
     selectedProj.tasks.push(task);
+    saveAndRender();
+})
+
+//clears completed tasks on click
+clearCompleteTasksBtn.addEventListener('click', e => {
+    const selectedProj = myProjects.find(proj => proj.id ===selectedListId);
+    selectedProj.tasks = selectedProj.tasks.filter(task => !task.complete);
     saveAndRender();
 })
 
@@ -68,7 +88,7 @@ deleteProjBtn.addEventListener('click', e => {
     saveAndRender();
 })
 
-//creates unique id for proj in proj list
+//creates unique id for proj in proj list and task in task list
 function createProj(name) {
     return { id: Date.now().toString(), name: name, tasks: [] };
 }
@@ -102,10 +122,9 @@ function render() {
     }
 }
 
-//displays task list
+//uses template to create tasks
 function renderTasks(selectedProj) {
     selectedProj.tasks.forEach(task => {
-        //importNode clones template from html for tasks
         const taskElement = document.importNode(taskTemplate.content, true);
         const checkbox = taskElement.querySelector('input');
         checkbox.id = task.id;
@@ -119,9 +138,9 @@ function renderTasks(selectedProj) {
 
 //displays tasks remaining
 function renderTaskCount(selectedProj) {
-    const incompleteTasksCount = selectedProj.tasks.filter(task => !task.complete).length;
-    const taskString = incompleteTasksCount === 1 ? 'task' : 'tasks';
-    taskCount.innerText = `${incompleteTasksCount} ${taskString} remaining`;
+    const incompleteTaskCount = selectedProj.tasks.filter(task => !task.complete).length;
+    const taskString = incompleteTaskCount === 1 ? "task" : "tasks";
+    taskCount.innerText = `${incompleteTaskCount} ${taskString} remaining`;
 }
 
 function renderProj() {
