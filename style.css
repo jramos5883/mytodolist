@@ -11,7 +11,7 @@ body {
     background-color: var(--color-background);
     color: var(--color-light);
     display: grid;
-    grid-template-columns: 1fr 1.5fr;
+    grid-template-columns: 1fr 2.5fr;
     grid-template-rows: 0.5fr 1fr 3fr;
     padding-left: 100px;
     padding-right: 100px;
@@ -36,8 +36,17 @@ body {
 
 .proj-list {
     font-size: 1.5rem;
-    line-height: 2;
+    line-height: 1.5;
     list-style: circle;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+label {
+    font-size: 1.25rem;
+    line-height: 1.25;
 }
 
 .proj-name {
@@ -114,6 +123,7 @@ form {
 
 .new.task {
     margin-bottom: 0;
+    font-size: 1.2rem;
 }
 
 .active-proj {
@@ -139,8 +149,7 @@ form {
 
 .task-count {
     margin: 0;
-    font-size: 1rem;
-
+    font-size: 1.2rem;
 }
 
 .todo-body {
