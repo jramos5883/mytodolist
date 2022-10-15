@@ -15,12 +15,10 @@
     
     <div class="proj-side">
         <h2 class="proj-list-title">Projects:</h2>
-        <ul class="proj-list" data-proj-list>
-            <!--<li class="proj-name active-proj">Daily</li>
-            <li class="proj-name">Weekly</li>
-            <li class="proj-name">Yearly</li>-->
-        </ul>
-
+        <ul class="proj-list" data-proj-list></ul>
+            <!--<li class="proj-name active-list">Stuff</li>
+            <li class="proj-name">Things</li>
+            <li class="proj-name">Dont Forget</li>-->
         <form action="" data-new-proj-form>
             <input
                 type="text"
@@ -34,37 +32,37 @@
         </form>
     </div>
 
-    <div class="todo-list">
+    <div class="todo-list" data-task-display-container>
         <div class="todo-header">
-            <h2 class="proj-title">Mock Project</h2>
-            <p class="task-count">2 tasks remaining</p>
+            <h2 class="proj-title" data-proj-title>Stuff</h2>
+            <p class="task-count" data-task-count>3 tasks remaining</p>
         </div>
     
         <div class="todo-body">
-            <div class="tasks">
+            <div class="tasks" data-tasks>
                 <div class="new task creator">
-                    <form action="">
+                    <form action="" data-new-task-form>
                         <input
                         type="text"
+                        data-new-task-input
                         class="new task"
                         placeholder="Task Name"
-                        -label="new task name"
-                        />
-
+                        aria-label="new task name"/>
                         <button class="btn-create"
                         aria-label="create new task">+</button>
                     </form>
                 </div>
             </div>
             <div class="delete-btns">
-                <button class="btn-delete">Clear Completed Tasks</button>
-                <button class="btn-delete">Delete List</button>
+                <button class="btn-delete" data-clear-tasks>Clear Completed Tasks</button>
+                <button class="btn-delete" data-delete-proj>Delete List</button>
             </div>
         </div>
     </div>
+    <!--template for tasks-->
     <template id="task-template">
         <div class="task">
-            <input type="checkbox"/>
+            <input type="checkbox" />
             <label>
                 <span class="custom-checkbox"></span>
             </label>
